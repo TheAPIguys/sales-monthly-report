@@ -63,7 +63,7 @@ def lambda_handler(event, context):
             "statusCode": 200,
             "headers": {
                 "Content-Type": "application/pdf",
-                "Content-Disposition": 'attachment; filename="generated_pdf.pdf"',
+                "Content-Disposition": 'attachment; filename="RFE-SALES-MONTHLY-REPORT.pdf"',
             },
             "body": pdf_content,
             "isBase64Encoded": True,
