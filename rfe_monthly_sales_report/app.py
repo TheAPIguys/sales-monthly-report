@@ -58,20 +58,7 @@ def lambda_handler(event, context):
         )
         pdf = second_page_brands(pdf, data)
         pdf = third_page(pdf, data)
-        # Debug print to check PDF content before encoding
-        pdf_content_raw = pdf.output(dest="S")
-        print("PDF Content Length:", len(pdf_content_raw))
-        print(
-            "PDF Content:", pdf_content_raw[:100]
-        )  # Print the first 100 characters of the PDF content
-
         pdf_content = export_body_encoded(pdf)
-        print("PDF Generated and Encoded")
-        print("Encoded PDF Content Length:", len(pdf_content))
-        print(
-            "Encoded PDF Content:", pdf_content[:100]
-        )  # Print the first 100 characters of the encoded PDF content
-
         print("PDF Generated")
         return {
             "statusCode": 200,
