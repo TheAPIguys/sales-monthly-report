@@ -9,7 +9,7 @@ Description: >
 Globals:
   Function:
     Timeout: 900
-    MemorySize: 128
+    MemorySize: 526
     # You can add LoggingConfig parameters such as the Logformat, Log Group, and SystemLogLevel or ApplicationLogLevel. Learn more here https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html#sam-function-loggingconfig.
     LoggingConfig:
       LogFormat: JSON
@@ -24,10 +24,11 @@ Resources:
         - x86_64
       FunctionUrlConfig:
         AuthType: NONE
-        InvokeMode: RESPONSE_STREAM
+
       Environment:
         Variables:
           VINTRACE_KEY: "57e7d07e-9ee2-4ca9-b4d6-cbe53faad0ff"
+          MPLCONFIGDIR: "/tmp"
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
