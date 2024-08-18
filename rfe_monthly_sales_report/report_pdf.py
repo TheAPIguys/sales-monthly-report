@@ -8,6 +8,7 @@ import pytz
 from sales_report import (
     add_first_page_reports,
     export_body_encoded,
+    fetch_data,
     second_page_brands,
     third_page,
 )
@@ -417,7 +418,7 @@ if __name__ == "__main__":
             data = json.load(file)
         return data
 
-    data = mock_data()
+    data = fetch_data()
 
     pdf = PDF()
     pdf = add_first_page_reports(

@@ -28,9 +28,16 @@ def fetch_data(month=7, year=2024):
         dict: The JSON response containing the sales report data.
     """
     key = os.environ.get("VINTRACE_KEY")
+
     url = f"https://rfe-portal.vercel.app/api/budget/sales-report-monthly/?key={key}&month={month}&year={year}"
     request = requests.get(url)
-    return request.json()
+    if request.status_code != 200:
+        raise Exception("Failed to fetch data")
+    try:
+        data = request.json()
+        return data
+    except:
+        raise Exception("Failed to fetch data")
 
 
 def format_value(value, decimal_places=1, percentage=False, currency=False):
@@ -205,7 +212,7 @@ def second_page_brands(pdf, data: list[dict]):
         wr_sv_data.append(
             {
                 "Customer": customer["customer"][:20],
-                "Actual Month": format_value(customer["actualMonth"], 0),
+                "Actual Month": format_value(customer.get("actualMonth", 0), 0),
                 "Actual YTD": format_value(customer["actualYTD"], 0),
                 "Budget YTD": format_value(customer["budgetYTD"], 0),
                 "Var %": format_value(customer["varYTD"], 0, True),

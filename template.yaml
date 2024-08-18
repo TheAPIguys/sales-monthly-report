@@ -24,7 +24,6 @@ Resources:
         - x86_64
       FunctionUrlConfig:
         AuthType: NONE
-
       Environment:
         Variables:
           VINTRACE_KEY: "57e7d07e-9ee2-4ca9-b4d6-cbe53faad0ff"
