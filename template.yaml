@@ -24,6 +24,7 @@ Resources:
         - x86_64
       FunctionUrlConfig:
         AuthType: NONE
+        InvokeMode: BUFFERED
 
       Environment:
         Variables:
