@@ -56,10 +56,8 @@ class PDF(FPDF):
         self.cell(0, 10, f"Page {self.page_no()}", align="R")
 
     def filter_unsupported_characters(self, text):
-        supported_characters = (
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,!?()'- "
-        )
-        return "".join(c for c in text if c in supported_characters)
+        # Latin-1 character set ranges from 0 to 255 in Unicode
+        return "".join(char for char in text if ord(char) <= 255)
 
     def add_big_wins_cell(self, title: str, text: str):
         if self.will_page_break(40):
@@ -81,7 +79,7 @@ class PDF(FPDF):
         self.y = self.y + 15
 
         self.write_html(
-            text,
+            self.filter_unsupported_characters(text),
             align="L",
             max_line_height=6,
         )
