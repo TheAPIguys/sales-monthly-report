@@ -237,7 +237,30 @@ def second_page_brands(pdf, data: list[dict]):
     pdf.render_table_data(
         wr_sv_data, [0.2, 0.12, 0.12, 0.1, 0.12, 0.12, 0.12, 0.1], True, True
     )
+
+    totals = wr_sv_data[-1]
+    pdf.render_table_data(
+        [
+            {
+                "Customer": "TOTAL BLEND CASES : " + format_value(133333, 0),
+                "Actual Month": format_value(
+                    int(totals["Forecast Year"].replace(",", "")), 0
+                ),
+                "Spare cases": "Spare: "
+                + format_value(
+                    133333 - int(totals["Forecast Year"].replace(",", "")), 0
+                ),
+                "VAR %": format_value(
+                    (133333 - int(totals["Forecast Year"].replace(",", ""))) / 133333,
+                    0,
+                    True,
+                ),
+            }
+        ],
+        [0.2 + 0.12 + 0.12 + 0.1 + 0.12, 0.12, 0.12, 0.1],
+    )
     pdf.add_line_break()
+    pdf.add_page()
     generate_wine_stocks_chart(data)
     pdf.add_chart("chart.png")
     pdf.add_page()
