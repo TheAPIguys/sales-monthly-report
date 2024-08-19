@@ -395,7 +395,8 @@ class PDF(FPDF):
 
     def add_chart(self, filename):
         remaining_height = self.h - self.get_y() - self.b_margin
-
+        if remaining_height > self.eph / 2:
+            remaining_height = self.eph / 2
         self.image(
             filename,
             x=self.l_margin,

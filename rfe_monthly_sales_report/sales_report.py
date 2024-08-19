@@ -51,16 +51,18 @@ def format_value(value, decimal_places=1, percentage=False, currency=False):
     """
     if value is None:
         return ""
-    formatted_number = round(value, decimal_places)
+
+    if decimal_places == 0:
+        formatted_number = int(round(value, decimal_places))
+    else:
+        formatted_number = round(value, decimal_places)
+
     if percentage is not False:
         formatted_percentage = f"{str(round(value * 100))}%"
         return formatted_percentage
     else:
-        return (
-            "$" + format(formatted_number, ",")
-            if currency
-            else format(formatted_number, ",")
-        )
+        formatted_number_str = format(formatted_number, ",")
+        return "$" + formatted_number_str if currency else formatted_number_str
 
 
 def process_customer_data(data):
@@ -236,28 +238,6 @@ def second_page_brands(pdf, data: list[dict]):
     )
     pdf.render_table_data(
         wr_sv_data, [0.2, 0.12, 0.12, 0.1, 0.12, 0.12, 0.12, 0.1], True, True
-    )
-
-    totals = wr_sv_data[-1]
-    pdf.render_table_data(
-        [
-            {
-                "Customer": "TOTAL BLEND CASES : " + format_value(133333, 0),
-                "Actual Month": format_value(
-                    int(totals["Forecast Year"].replace(",", "")), 0
-                ),
-                "Spare cases": "Spare: "
-                + format_value(
-                    133333 - int(totals["Forecast Year"].replace(",", "")), 0
-                ),
-                "VAR %": format_value(
-                    (133333 - int(totals["Forecast Year"].replace(",", ""))) / 133333,
-                    0,
-                    True,
-                ),
-            }
-        ],
-        [0.2 + 0.12 + 0.12 + 0.1 + 0.12, 0.12, 0.12, 0.1],
     )
     pdf.add_line_break()
     pdf.add_page()
