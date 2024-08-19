@@ -93,7 +93,7 @@ def process_customer_data(data):
     return customer_data
 
 
-def add_first_page_reports(pdf, data: list[dict]):
+def add_first_page_reports(pdf, data: list[dict], month=7, year=2024):
     """
     Adds the first page of the sales report to the PDF. The first page includes the cases by region and revenue by region. the big wins this month section.
 
@@ -103,7 +103,7 @@ def add_first_page_reports(pdf, data: list[dict]):
     """
     pdf.add_page()
     pdf.header()
-    today = datetime.strptime("2024-07-01", "%Y-%m-%d")
+    today = datetime.strptime(f"{year}-{month}-01", "%Y-%m-%d")
     for i, item in enumerate(data["firstPageCases"]):
         for key, value in item.items():
             if key != "region":

@@ -44,7 +44,7 @@ def lambda_handler(event, context):
     try:
         data = fetch_data(month=month, year=year)
         pdf = PDF()
-        pdf = add_first_page_reports(pdf, data)
+        pdf = add_first_page_reports(pdf, data, month=month, year=year)
         pdf = second_page_brands(pdf, data)
         pdf = third_page(pdf, data)
         pdf_content = export_body_encoded(pdf)

@@ -14,7 +14,7 @@ Globals:
     LoggingConfig:
       LogFormat: JSON
 Resources:
-  SalesShipmentSummaryFunction:
+  MonthlySalesReportFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: rfe_monthly_sales_report/
@@ -36,9 +36,9 @@ Outputs:
   # Find out more about other implicit resources you can reference within SAM
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
 
-  SalesShipmentSummaryFunction:
+  MonthlySalesReportFunction:
     Description: Sales Shipment Summary Lambda Function ARN
-    Value: !GetAtt SalesShipmentSummaryFunction.Arn
-  SalesShipmentSummaryFunctionIamRole:
+    Value: !GetAtt MonthlySalesReportFunction.Arn
+  MonthlySalesReportFunctionIamRole:
     Description: Implicit IAM Role created for Sales Shipment Summary function
-    Value: !GetAtt SalesShipmentSummaryFunctionRole.Arn
+    Value: !GetAtt MonthlySalesReportFunctionRole.Arn

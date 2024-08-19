@@ -7,6 +7,6 @@ architecture = "x86_64"
 handler = "app.lambda_handler"
 manifest_hash = "17807ca60aab3129e13f983454d881c5"
 packagetype = "Zip"
-functions = ["SalesShipmentSummaryFunction"]
+functions = ["MonthlySalesReportFunction"]
 
 [layer_build_definitions]
