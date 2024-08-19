@@ -74,7 +74,7 @@ class PDF(FPDF):
         self.x = self.l_margin
         self.y = start_y + 3
         self.cell(0, 10, title, align="L")
-        self.set_font("Times", size=10, style="I")
+        self.set_font("Times", size=11, style="I")
         self.x = self.l_margin
         self.y = self.y + 15
 
