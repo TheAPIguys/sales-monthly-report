@@ -93,7 +93,7 @@ def process_customer_data(data):
     return customer_data
 
 
-def add_first_page_reports(pdf, data: list[dict], big_wins: str):
+def add_first_page_reports(pdf, data: list[dict]):
     """
     Adds the first page of the sales report to the PDF. The first page includes the cases by region and revenue by region. the big wins this month section.
 
@@ -167,7 +167,7 @@ def add_first_page_reports(pdf, data: list[dict], big_wins: str):
     pdf.add_line_break()
     pdf.add_big_wins_cell(
         "BIG WINS THIS MONTH",
-        big_wins,
+        data["bigWins"],
     )
     return pdf
 

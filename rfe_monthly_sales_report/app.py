@@ -42,20 +42,7 @@ def lambda_handler(event, context):
     try:
         data = fetch_data()
         pdf = PDF()
-        pdf = add_first_page_reports(
-            pdf,
-            data,
-            """* Liquorland NZ core range WR Pinot Gris * start 1st September (175 stores)
- * New World Wine Awards Top 50 WRSB24. This will drive serious 
- volume of the SB. We will need to allocate all remaining SB23 to 
- other accounts other than Foodstuffs.
- * 105k SB24 bulk sold to Booster. Potential for more
- * Wairau River is named a 2023 Impact Hot Prospect Brand 
- (2nd year in a row!) The 2023 Hot Prospects will be featured in the 
- Sept 1 & 15th issue of Impact and the October issue of Market 
- Watch
- """,
-        )
+        pdf = add_first_page_reports(pdf, data)
         pdf = second_page_brands(pdf, data)
         pdf = third_page(pdf, data)
         pdf_content = export_body_encoded(pdf)
