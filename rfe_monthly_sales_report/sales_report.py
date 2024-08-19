@@ -53,7 +53,7 @@ def format_value(value, decimal_places=1, percentage=False, currency=False):
         return ""
 
     if decimal_places == 0:
-        formatted_number = int(round(value, decimal_places))
+        formatted_number = int(round(int(value)))
     else:
         formatted_number = round(value, decimal_places)
 
@@ -109,7 +109,7 @@ def add_first_page_reports(pdf, data: list[dict], month=7, year=2024):
     for i, item in enumerate(data["firstPageCases"]):
         for key, value in item.items():
             if key != "region":
-                data["firstPageCases"][i][key] = format_value(value)
+                data["firstPageCases"][i][key] = format_value(value, 0)
             if "var" in key:
                 data["firstPageCases"][i][key] = format_value(value, 0, True)
 
