@@ -38,9 +38,11 @@ def lambda_handler(event, context):
 
         Return doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html
     """
-
+    ## get month and year from the query string
+    month = int(event["queryStringParameters"]["month"])
+    year = int(event["queryStringParameters"]["year"])
     try:
-        data = fetch_data()
+        data = fetch_data(month=month, year=year)
         pdf = PDF()
         pdf = add_first_page_reports(pdf, data)
         pdf = second_page_brands(pdf, data)
@@ -51,7 +53,7 @@ def lambda_handler(event, context):
             "statusCode": 200,
             "headers": {
                 "Content-Type": "application/pdf",
-                "Content-Disposition": 'attachment; filename="rfe_sales_monthly_report.pdf"',
+                "Content-Disposition": f'attachment; filename="rfe_sales_monthly_report_{month}-{year}.pdf"',
             },
             "body": pdf_content,
             "isBase64Encoded": True,

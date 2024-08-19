@@ -76,14 +76,12 @@ class PDF(FPDF):
         self.x = self.l_margin
         self.y = start_y + 3
         self.cell(0, 10, title, align="L")
-        self.set_font("helvetica", size=10, style="I")
+        self.set_font("Times", size=10, style="I")
         self.x = self.l_margin
         self.y = self.y + 15
 
-        self.multi_cell(
-            self.epw - self.x,
-            10,
-            self.filter_unsupported_characters(text),
+        self.write_html(
+            text,
             align="L",
             max_line_height=6,
         )
@@ -418,27 +416,13 @@ if __name__ == "__main__":
             data = json.load(file)
         return data
 
-    data = fetch_data()
+    data = mock_data()
 
     pdf = PDF()
-    pdf = add_first_page_reports(
-        pdf,
-        data,
-        """* Liquorland NZ core range WR Pinot Gris * start 1st September (175 stores)
- * New World Wine Awards Top 50 WRSB24. This will drive serious 
- volume of the SB. We will need to allocate all remaining SB23 to 
- other accounts other than Foodstuffs.
- * 105k SB24 bulk sold to Booster. Potential for more
- * Wairau River is named a 2023 Impact Hot Prospect Brand 
- (2nd year in a row!) The 2023 Hot Prospects will be featured in the 
- Sept 1 & 15th issue of Impact and the October issue of Market 
- Watch
- """,
-    )
+    pdf = add_first_page_reports(pdf, data)
     pdf = second_page_brands(pdf, data)
     pdf = third_page(pdf, data)
-
     today = datetime.strptime("2024-07-01", "%Y-%m-%d")
     pdf.output(f"RFE MONTHLY SALES REPORT - {today.strftime('%B %Y')}.pdf")
-    print(export_body_encoded(pdf))
+
     print("PDF Generated")
